@@ -6,7 +6,7 @@ Client Side – Homework 3
 An interactive jungle website built with HTML, CSS and JavaScript.
 Click an animal (or press its key) to hear its sound, while jungle music plays in the background.
 
-**Live site:** [[https://USERNAME.github.io/REPO-NAME/](https://noambara.github.io/exercise3/)](https://noambara.github.io/exercise3/)
+**Live site:** https://noambara.github.io/exercise3/
 
 ## Keyboard keys
 
