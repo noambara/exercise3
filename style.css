@@ -1,0 +1,317 @@
+/* ===== General ===== */
+:root {
+    --jungle-dark: #0f2a1d;
+    --jungle: #1e4d2b;
+    --leaf: #3f8f3a;
+    --lime: #b5e655;
+    --sand: #f6efd9;
+    --banana: #ffd23f;
+    --radius: 18px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    color: var(--sand);
+    background:
+        radial-gradient(circle at 20% 10%, rgba(181, 230, 85, 0.15), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(63, 143, 58, 0.25), transparent 45%),
+        linear-gradient(160deg, var(--jungle-dark), var(--jungle));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== Welcome overlay ===== */
+.welcome {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 25, 15, 0.92);
+    transition: opacity 0.5s;
+}
+
+.welcome.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.welcome-box {
+    text-align: center;
+    padding: 40px 30px;
+    border: 3px solid var(--lime);
+    border-radius: var(--radius);
+    background: var(--jungle);
+    max-width: 90%;
+}
+
+.welcome-box h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--banana);
+}
+
+.welcome-box p {
+    margin-bottom: 25px;
+}
+
+/* ===== Header ===== */
+.site-header {
+    position: relative;
+    text-align: center;
+    padding: 50px 20px 25px;
+    overflow: hidden;
+}
+
+/* decorative "vines" made only with CSS */
+.vines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: repeating-linear-gradient(90deg, var(--leaf) 0 30px, var(--lime) 30px 36px);
+}
+
+.site-header h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: var(--banana);
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 var(--jungle-dark), 0 0 25px rgba(255, 210, 63, 0.4);
+}
+
+.subtitle {
+    margin-top: 8px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ===== Controls (flexbox) ===== */
+.controls {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+.btn {
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    background: var(--banana);
+    color: var(--jungle-dark);
+    transition: transform 0.15s, background 0.15s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: var(--lime);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-big {
+    font-size: 1.3rem;
+    padding: 14px 34px;
+}
+
+.volume {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume input {
+    accent-color: var(--banana);
+    width: 120px;
+}
+
+.search {
+    font: inherit;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 2px solid var(--lime);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--sand);
+    outline: none;
+    width: 210px;
+}
+
+.search::placeholder {
+    color: rgba(246, 239, 217, 0.6);
+}
+
+/* ===== Animal cards (grid) ===== */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.jungle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.card {
+    position: relative;
+    cursor: pointer;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--jungle-dark);
+    border: 3px solid transparent;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover,
+.card:focus-visible {
+    transform: translateY(-6px);
+    border-color: var(--lime);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+    outline: none;
+}
+
+.card.playing {
+    border-color: var(--banana);
+    box-shadow: 0 0 0 4px rgba(255, 210, 63, 0.4), 0 14px 28px rgba(0, 0, 0, 0.45);
+}
+
+.card img,
+.card .placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.card .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: var(--leaf);
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+}
+
+.card-info h2 {
+    font-size: 1.2rem;
+}
+
+.counter {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+
+.key {
+    min-width: 36px;
+    padding: 6px 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+    background: var(--sand);
+    color: var(--jungle-dark);
+    box-shadow: 0 3px 0 #b9ad87;
+}
+
+.no-results {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.2rem;
+}
+
+/* ===== Stats ===== */
+.stats {
+    max-width: 1200px;
+    width: calc(100% - 40px);
+    margin: 10px auto 30px;
+    padding: 18px 24px;
+    border-radius: var(--radius);
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.stats h3 {
+    color: var(--banana);
+    margin-bottom: 8px;
+}
+
+.stats ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 40px;
+}
+
+.stats span {
+    font-weight: bold;
+    color: var(--lime);
+}
+
+/* ===== Footer ===== */
+.site-footer {
+    text-align: center;
+    padding: 18px;
+    background: var(--jungle-dark);
+    font-size: 0.9rem;
+}
+
+/* ===== Responsive (media queries) ===== */
+@media (max-width: 1000px) {
+    .jungle-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 750px) {
+    .jungle-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .key {
+        display: none; /* phones usually have no physical keyboard */
+    }
+}
+
+@media (max-width: 460px) {
+    .jungle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .search {
+        width: 100%;
+    }
+}

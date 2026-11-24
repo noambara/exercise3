@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noam Jungle</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Welcome screen: browsers block sound until the user clicks, so we ask for one click -->
+    <div id="welcome" class="welcome">
+        <div class="welcome-box">
+            <h2>Welcome to Noam's Jungle</h2>
+            <p>Turn your sound on and step inside.</p>
+            <button id="enterBtn" class="btn btn-big">Enter the Jungle</button>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="vines" aria-hidden="true"></div>
+        <h1>Noam's Jungle</h1>
+        <p class="subtitle">Click an animal or press its key to hear it</p>
+
+        <nav class="controls">
+            <button id="musicBtn" class="btn">Pause music</button>
+
+            <label class="volume" for="volume">
+                Volume
+                <input type="range" id="volume" min="0" max="1" step="0.05" value="0.4">
+            </label>
+
+            <button id="randomBtn" class="btn">Random animal</button>
+
+            <input type="search" id="search" class="search" placeholder="Search an animal...">
+        </nav>
+    </header>
+
+    <main>
+        <!-- The animal cards are created by script.js from the animals list -->
+        <section id="jungle" class="jungle-grid" aria-live="polite"></section>
+        <p id="noResults" class="no-results hidden">No animal by that name lives here.</p>
+    </main>
+
+    <aside class="stats">
+        <h3>Jungle stats</h3>
+        <ul>
+            <li>Total sounds played: <span id="totalCount">0</span></li>
+            <li>Favourite animal: <span id="favourite">none yet</span></li>
+        </ul>
+    </aside>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Noam &middot; Client Side &middot; Homework 3</p>
+    </footer>
+
+    <!-- Background music, starts when the page loads (or after the first click) -->
+    <audio id="bgMusic" src="sounds/background.mp3" loop></audio>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
